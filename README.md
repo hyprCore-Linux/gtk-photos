@@ -46,3 +46,7 @@ Folder thumbnails are cached under `~/.cache/gtk-apps/gtk-photos/`.
 ```bash
 ./install.sh
 ```
+
+## License
+
+GNU General Public License v3.0. See [LICENSE](LICENSE).
