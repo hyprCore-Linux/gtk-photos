@@ -29,9 +29,9 @@ def _ensure_gtk_theme_on_path() -> None:
         p = p.parent
     cands.extend(
         (
-            Path("/usr/local/lib/neuronix/gtk-apps/gtk-theme/python"),
-            Path("/usr/local/lib/neuronix/gtk-apps/python"),
-            Path("/usr/share/neuronix/gtk-theme/python"),
+            Path("/usr/local/lib/hyprcore/gtk-apps/gtk-theme/python"),
+            Path("/usr/local/lib/hyprcore/gtk-apps/python"),
+            Path("/usr/share/hyprcore/gtk-theme/python"),
         )
     )
     for d in cands:
@@ -222,7 +222,7 @@ class ImageViewerWindow(Gtk.Window):
     
     def __init__(self, filepath: str, image_list: list = None, current_index: int = 0, parent_window=None):
         super().__init__(title=os.path.basename(filepath))
-        # Attach to the suite app so Hyprland class is org.neuronix.GtkPhotos (grid rules).
+        # Attach to the suite app so Hyprland class is org.hyprcore.GtkPhotos (grid rules).
         if parent_window is not None:
             try:
                 app = parent_window.get_application()

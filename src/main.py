@@ -95,7 +95,7 @@ class PhotosApp(Gtk.Application):
 
     def __init__(self):
         super().__init__(
-            application_id='org.neuronix.GtkPhotos',
+            application_id='org.hyprcore.GtkPhotos',
             flags=Gio.ApplicationFlags.FLAGS_NONE
         )
         self.connect('activate', self.on_activate)
