@@ -1353,8 +1353,7 @@ class MainWindow(Gtk.ApplicationWindow):
         )
         
         header = Gtk.HeaderBar()
-        header.set_show_title_buttons(True)
-        header.set_title_widget(Gtk.Label(label="Photo Organizer"))
+        gtk_theme.prepare_headerbar(header)
         self.set_titlebar(header)
         gtk_theme.attach_profile_menu(
             self,

@@ -120,23 +120,7 @@ class PhotosApp(Gtk.Application):
 
     def _pick_media_directory(self, missing_path: str):
         """Ask the user to choose a media folder when config points nowhere."""
-        dialog = Gtk.AlertDialog()
-        dialog.set_message("Photos folder not found")
-        dialog.set_detail(
-            f"Configured media_directory is missing:\n{missing_path or '(empty)'}\n\n"
-            "Choose a folder that holds images/videos to organize, "
-            "or Cancel to quit."
-        )
-        dialog.set_buttons(["Cancel", "Choose Folder…"])
-        dialog.set_cancel_button(0)
-        dialog.set_default_button(1)
-
-        def on_alert(_d, result):
-            try:
-                choice = dialog.choose_finish(result)
-            except GLib.Error:
-                self.quit()
-                return
+        def on_choice(choice: int):
             if choice != 1:
                 self.quit()
                 return
@@ -176,7 +160,22 @@ class PhotosApp(Gtk.Application):
 
             file_dialog.select_folder(None, None, on_folder)
 
-        dialog.choose(None, None, on_alert)
+        try:
+            import gtk_theme
+
+            gtk_theme.present_buttons(
+                None,
+                "Photos folder not found",
+                f"Configured media_directory is missing:\n{missing_path or '(empty)'}\n\n"
+                "Choose a folder that holds images/videos to organize, "
+                "or Cancel to quit.",
+                ["Cancel", "Choose Folder…"],
+                default_idx=1,
+                cancel_idx=0,
+                callback=on_choice,
+            )
+        except Exception:
+            self.quit()
 
     def on_activate(self, app):
         """Handle application activation."""
